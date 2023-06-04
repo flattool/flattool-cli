@@ -8,10 +8,10 @@ Flattool is a command line script that should make dealing with flatpaks through
 
 ## Important things to note:
 This is my first big project, there's a reason the version number doesn't start with a 1, haha. All this to say that I foresee that there could be issues.  
-Flattool assumes that flatpak user data is stored within ~/.var/app (the default location for these folders).
-Flattool is not a replacement for flatpak, it merely sends the appropriate flatpak commands for the action.
-Flattool uses `gio trash` to remove folders, not rm, so if you want to clear your diskspace you'll still need to empty your trash. This is to avoid any perminant deletion of files.
+Flattool assumes that flatpak user data is stored within ~/.var/app (the default location for these folders).  
+Flattool is not a replacement for flatpak, it merely sends the appropriate flatpak commands for the action.  
+Flattool uses `gio trash` to remove folders, not rm, so if you want to clear your diskspace you'll still need to empty your trash. This is to avoid any perminant deletion of files.  
 
 ## How to install:
-run `echo $PATH` in your terminal.
+run `echo $PATH` in your terminal.  
 Place this script within any folder mentioned in the output of that command.
