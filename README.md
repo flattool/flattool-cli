@@ -1,4 +1,5 @@
 # flattool
+![Flattool Logo, a simple icon of a tower crane holding a dangling letter F in front of "lattool"](Flattool Logo - Name.png)
 Flattool is a command line script that should make dealing with flatpaks through the command line better.
 
 ## Flattool has 3 main uses.
@@ -17,4 +18,6 @@ Flattool is a command line script that should make dealing with flatpaks through
 2. Run `printf $PATH` in your terminal.  
 3. Place this newly downloaded flattool script within any directory mentioned in the output of that command.
 4. Navigate to where you have moved flattool and run `chmod +x flattool`. This will allow flattool to be executed.  
-5. All set! Now all you need to do is run flattool with `flattool --help`.
+
+
+All set! Now all you need to do is run flattool with `flattool --help`.
