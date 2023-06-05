@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # Global variables
-versionNumber="0.1.0"
+versionNumber="0.1.1"
 appID=''
 
 # Functions to save time programming this
