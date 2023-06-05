@@ -13,8 +13,8 @@ Flattool is a command line script that should make dealing with flatpaks through
 - Flattool uses `gio trash` to remove folders, not rm, so if you want to clear your diskspace you'll still need to empty your trash. This is to avoid any perminant deletion of files.
 
 ## How to install:
-Download the `flattool` file from this repo.  
-Run `printf $PATH` in your terminal.  
-Place this newly downloaded flattool script within any directory mentioned in the output of that command.
-Navigate to where you have moved flattool and run `chmod +x flattool`. This will allow flattool to be executed.  
+1. Download the `flattool` file from this repo.  
+2. Run `printf $PATH` in your terminal.  
+3. Place this newly downloaded flattool script within any directory mentioned in the output of that command.
+4. Navigate to where you have moved flattool and run `chmod +x flattool`. This will allow flattool to be executed.  
 All set! Now all you need to do is run flattool with `flattool --help`.
