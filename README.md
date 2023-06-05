@@ -1,5 +1,5 @@
 # flattool
-![Flattool Logo, a simple icon of a tower crane holding a dangling letter F in front of "lattool"]([Flattool Logo - Name.png](https://github.com/heliguy4599/flattool/blob/main/Flattool%20Logo%20-%20Name.png?raw=true))
+![Flattool Logo, a simple icon of a tower crane holding a dangling letter F in front of "lattool"]([[Flattool Logo - Name.png](https://github.com/heliguy4599/flattool/blob/main/Flattool%20Logo%20-%20Name.png?raw=true)](https://github.com/heliguy4599/flattool/blob/main/Flattool%20Logo%20-%20Name.png))
 Flattool is a command line script that should make dealing with flatpaks through the command line better.
 
 ## Flattool has 3 main uses.
