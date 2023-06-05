@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-# SPDX-License-Identifier: GPL-3.0-only
 
 # Global variables
 versionNumber="0.1.0"
@@ -102,7 +101,7 @@ print_subcommand_help() {
         search)
             println "  search - usage: flattool search <app-query>"
             println "    can also be ran with '-s'"
-            println "    about: Returns any matching lines from 'flatpak list' that match the query\n"
+            println "    about:Searches installed flatpaks and returns lines from 'flatpak list' that match the query\n"
             ;;
         id)
             println "  id - usage: flattool id <app-query>"
@@ -186,15 +185,7 @@ searchApp() {
         println "No installed application found from query: '\033[1m$1\033[0m'"
         exit 1
     fi
-    println $output
-
-    identifyByQuery $1
-    output=$(ls $HOME/.var/app | grep "$appID")
-    if [ -z "$output" ]; then
-        println "No user data found from query: '\033[1m$appID\033[0m'"
-        exit 1
-    fi
-    println "User data is found for '\033[1m$output\033[0m'"
+    println "$output"
 }
 
 installApp() {
