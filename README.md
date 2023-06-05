@@ -16,5 +16,5 @@ Flattool is a command line script that should make dealing with flatpaks through
 1. Download the `flattool` file from this repo.  
 2. Run `printf $PATH` in your terminal.  
 3. Place this newly downloaded flattool script within any directory mentioned in the output of that command.
-4. Navigate to where you have moved flattool and run `chmod +x flattool`. This will allow flattool to be executed.<br>
+4. Navigate to where you have moved flattool and run `chmod +x flattool`. This will allow flattool to be executed.<br><br>
 All set! Now all you need to do is run flattool with `flattool --help`.
