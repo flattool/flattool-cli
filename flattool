@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-SPDX-License-Identifier: GPL-3.0-only
+# SPDX-License-Identifier: GPL-3.0-only
 
 # Global variables
 versionNumber="0.1.1"
