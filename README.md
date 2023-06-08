@@ -13,6 +13,10 @@ Flattool is a command line script that should make dealing with flatpaks through
 - Flattool is not a replacement for flatpak, it merely sends the appropriate flatpak commands for the desired action.
 - Flattool uses `gio trash` to delete folders, not `rm`, so if you want to clear your diskspace you'll still need to empty your trash. This is to avoid any perminant deletion of files.
 
+## Dependancies
+- gio. As said before, this script uses `gio trash`, so gio must be installed. gio is part of glib2, so make sure glib2 is on your system.
+- flatpak. Of course, this script's entire purpose is for managing flatpak applications, as such, flatpak itself must be installed.
+
 ## How to install:
 1. Download the `flattool` file from this repo.  
 2. Run `printf $PATH` in your terminal.  
