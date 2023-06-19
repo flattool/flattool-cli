@@ -8,7 +8,7 @@ Flattool is a command line script that should make dealing with flatpaks through
 3. Flattool can help clean up orphaned user files. Flattool will find any user data files that do not have an associated flatpak installed, and either trash the folder or attempt to install the flatpak, based on your choice.
 
 ## Important things to note:
-- This is my first big project. It's at a 1.0 release, but I am still a new developer, so please don't be too rough if there bugs
+- This is my first big project. It's at a 1.0 release, but I am still a new developer, so please don't be too rough if there are bugs
 - Flattool assumes that flatpak user data is stored within ~/.var/app (the default location for these folders).
 - Flattool is not a replacement for flatpak, it merely sends the appropriate flatpak commands for the desired action.
 - Flattool uses `gio trash` to delete folders, not `rm`, so if you want to clear your diskspace you'll still need to empty your trash. This is to avoid any perminant deletion of files.
