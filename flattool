@@ -3,7 +3,7 @@
 
 # Settings and stuff, 'as' stands for App Setting. LastUpdateCheck must be 10 digits
 asFirstRun="false"
-asLastUpdateCheck="1687162396"
+asLastUpdateCheck="1687163258"
 
 # Global variables
 versionNumber="1.0.0"
@@ -15,7 +15,7 @@ normalTxt=$(tput sgr0)
 errTxt=$(tput setaf 1 && tput bold)
 
 # Haha, April Fools nerd
-if [ $(date +%m%d) -eq 0401 ]; then
+if [ "$(date +%m%d)" -eq 0401 ]; then
     echo "Haha, April 1st, get ejected"
     eject
 fi
@@ -35,11 +35,11 @@ printerr() {
 # Check for any new versions
 checkForNewVersion() {
     currentTime=$(date +%s)
-    if [ $(($currentTime - $asLastUpdateCheck)) -lt 3600 ]; then
+    if ((currentTime - asLastUpdateCheck < 3600)); then
         return 2
     fi
     sed -E -i "s/^asLastUpdateCheck=\"[0-9]{10}\"$/asLastUpdateCheck=\"${currentTime}\"/" "$(which flattool)"
-    latest_release=$(curl -s "https://api.github.com/repos/$owner/$repo/releases/latest")
+    latestRelease=$(curl -s "https://api.github.com/repos/$owner/$repo/releases/latest")
     latestTag=$(echo "$latestRelease" | grep -o '"tag_name": "[^"]*' | cut -d'"' -f4 | head -n1)
     if [ "$latestTag" = "$versionNumber" ]; then
         return 0
@@ -221,7 +221,7 @@ fixOrphans() {
         fi
     done
 
-    if [ -n "$orphanedAppsList" ]; then
+    if [ -n "${orphanedAppsList[0]}" ]; then #check for if the first element is empty, which will indicate if there is no orphaned apps
         echo -e "\nThese user data folders exist with no installed flatpaks:"
         for element in "${orphanedAppsList[@]}"; do
             echo "  $element"
@@ -306,7 +306,7 @@ fixOrphans() {
 
 if [ "$asFirstRun" == "true" ]; then
     echo "Thank you for using flattool! This is the first time its being ran. Make sure to run 'flattool --help' if you are unsure of how to use this."
-    sed -i 's/^asFirstRun="true"$/asFirstRun="false"/' $(which flattool)
+    sed -i 's/^asFirstRun="true"$/asFirstRun="false"/' "$(which flattool)"
 fi
 
 checkForNewVersion
@@ -414,14 +414,9 @@ case "$subcommand" in
         ;;
     update-check)
         checkForNewVersion
-        case $? in
-            1)
-                echo "New version available: ${latestTag}"
-                ;;
-            2)
-                echo "Due to GitHub API restrictions, can only check for updates once an hour"
-                ;;
-        esac
+        if [ $? == 2 ]; then
+            echo "Due to GitHub API restrictions, can only check for updates once an hour"
+        fi
         ;;
     *)
         printerr "'${subcommand}' is not a flattool command" "See 'flattool --help'"
