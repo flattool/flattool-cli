@@ -3,7 +3,7 @@
 
 # Settings and stuff, 'as' stands for App Setting. LastUpdateCheck must be 10 digits
 asFirstRun="false"
-asLastUpdateCheck="1687163258"
+asLastUpdateCheck="1687164970"
 
 # Global variables
 versionNumber="1.0.0"
@@ -414,9 +414,14 @@ case "$subcommand" in
         ;;
     update-check)
         checkForNewVersion
-        if [ $? == 2 ]; then
-            echo "Due to GitHub API restrictions, can only check for updates once an hour"
-        fi
+        case $? in
+            0)
+                echo "flattool is up to date"
+                ;;
+            2)
+                echo "Due to GitHub API restrictions, can only check for updates once an hour"
+                ;;
+            esac
         ;;
     *)
         printerr "'${subcommand}' is not a flattool command" "See 'flattool --help'"
