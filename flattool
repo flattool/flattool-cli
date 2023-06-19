@@ -39,8 +39,7 @@ checkForNewVersion() {
         return 2
     fi
     sed -E -i "s/^asLastUpdateCheck=\"[0-9]{10}\"$/asLastUpdateCheck=\"${currentTime}\"/" "$(which flattool)"
-    #   latest_release=$(curl -s "https://api.github.com/repos/$owner/$repo/releases/latest")
-    latestRelease=$(curl -s "https://api.github.com/repos/$owner/$repo/releases")
+    latest_release=$(curl -s "https://api.github.com/repos/$owner/$repo/releases/latest")
     latestTag=$(echo "$latestRelease" | grep -o '"tag_name": "[^"]*' | cut -d'"' -f4 | head -n1)
     if [ "$latestTag" = "$versionNumber" ]; then
         return 0
