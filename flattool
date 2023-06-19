@@ -3,7 +3,7 @@
 
 # Settings and stuff, 'as' stands for App Setting. LastUpdateCheck must be 10 digits
 asFirstRun="false"
-asLastUpdateCheck="1687164970"
+asLastUpdateCheck="0000000000"
 
 # Global variables
 versionNumber="1.0.0"
