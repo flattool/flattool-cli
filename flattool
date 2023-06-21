@@ -7,7 +7,7 @@ asLastUpdateCheck="0000000000"
 asAutoCheckUpdate="false"
 
 # Global variables
-versionNumber="1.1.0"
+versionNumber="1.2.0"
 owner="heliguy4599"
 repo="flattool"
 appID=''
@@ -450,7 +450,7 @@ case "$subcommand" in
                 echo "New version of flattool is available: ${latestTag}"
                 userConsent "Do you want to install this new update?"
                 echo "Installing new version..."
-                wget -N -P $(dirname $(which flattool)) "https://raw.githubusercontent.com/${owner}/${repo}/main/flattool"
+                wget -N -P "$(dirname "$(which flattool)")" "https://raw.githubusercontent.com/${owner}/${repo}/main/flattool"
                 ;;
             2)
                 echo "Due to GitHub API restrictions, can only check for updates once an hour"
