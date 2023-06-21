@@ -6,7 +6,7 @@ asFirstRun="false"
 asLastUpdateCheck="0000000000"
 
 # Global variables
-versionNumber="1.0.0"
+versionNumber="1.0.1"
 owner="heliguy4599"
 repo="flattool"
 appID=''
