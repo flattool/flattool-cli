@@ -153,7 +153,7 @@ printSubcommandHelp() {
         version)
             echo -e "  version - usage: flattool version"
             echo -e "    can also be ran with '-v', '--version'"
-            echo -e "    about: prints the currently running version of flattool and where flattool is running from\n"
+            echo -e "    about: Prints the currently running version of flattool and where flattool is running from\n"
             ;;
         auto-update)
             echo -e "  auto-update - usage: flattool auto-update"
@@ -161,12 +161,12 @@ printSubcommandHelp() {
             ;;
         update-check)
             echo -e "  update-check: flattool update-check"
-            echo -e "    about: checks github to see if there is a new release and if there is, prompts to install it. Can only check once an hour.\n"
+            echo -e "    about: Checks github to see if there is a new release and if there is, prompts to install it. Can only check once an hour.\n"
             ;;
         help)
             echo -e "  help - usage: flattool help"
             echo -e "    can also be ran with '-h', '--help'"
-            echo -e "    about: prints the full help message for flattool"
+            echo -e "    about: Prints the full help message for flattool"
             ;;
     esac
 }
