@@ -2,11 +2,12 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 # Settings and stuff, 'as' stands for App Setting. LastUpdateCheck must be 10 digits
-asFirstRun="false"
+asFirstRun="true"
 asLastUpdateCheck="0000000000"
+asAutoCheckUpdate="false"
 
 # Global variables
-versionNumber="1.0.1"
+versionNumber="1.2.0"
 owner="heliguy4599"
 repo="flattool"
 appID=''
@@ -108,6 +109,7 @@ printMasterHelp() {
     printSubcommandHelp "run"
     printSubcommandHelp "orphans"
     printSubcommandHelp "version"
+    printSubcommandHelp "auto-update"
     printSubcommandHelp "update-check"
     printSubcommandHelp "help"
 }
@@ -153,9 +155,13 @@ printSubcommandHelp() {
             echo -e "    can also be ran with '-v', '--version'"
             echo -e "    about: prints the currently running version of flattool and where flattool is running from\n"
             ;;
+        auto-update)
+            echo -e "  auto-update - usage: flattool auto-update"
+            echo -e "    about: Toggles whether flattool will check for updates on each run\n"
+            ;;
         update-check)
             echo -e "  update-check: flattool update-check"
-            echo -e "    about: checks github to see if there is a new release. Can only check once an hour.\n"
+            echo -e "    about: checks github to see if there is a new release and if there is, prompts to install it. Can only check once an hour.\n"
             ;;
         help)
             echo -e "  help - usage: flattool help"
@@ -305,17 +311,30 @@ fixOrphans() {
 # <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
 
 if [ "$asFirstRun" == "true" ]; then
-    echo "Thank you for using flattool! This is the first time its being ran. Make sure to run 'flattool --help' if you are unsure of how to use this."
     sed -i 's/^asFirstRun="true"$/asFirstRun="false"/' "$(which flattool)"
-fi
-
-checkForNewVersion
-if [ $? -eq 1 ]; then
-    echo "New version is available: ${latestTag}"
+    echo -e "Thank you for using flattool! This is the first time its being ran. Make sure to run 'flattool --help' if you are unsure of how to use this.\n"
+    echo -e "flattool can check for updates, these checks will occur on every run, so long as it has been an hour since the last check."
+    echo -n "Do you want to enable auto update checks? (You can change your mind later with 'flattool auto-update') [Y|n]: "
+    read -r answer
+    case $answer in
+        [Nn])
+            sed -i 's/^asAutoCheckUpdate="true"$/asAutoCheckUpdate="false"/' "$(which flattool)"
+            ;;
+        *)
+            sed -i 's/^asAutoCheckUpdate="false"$/asAutoCheckUpdate="true"/' "$(which flattool)"
+            ;;
+    esac        
 fi
 
 # Setting the subcommand
 subcommand=$1
+
+if [ "$asAutoCheckUpdate" == "true" ] && [ "$subcommand" != "update-check" ] && [ "$subcommand" != "auto-update" ]; then
+    checkForNewVersion
+    if [ $? -eq 1 ]; then
+        echo "New version of flattool is available: ${latestTag}"
+    fi
+fi
 
 # Check if any subcommand is provided
 if [ $# -eq 0 ]; then
@@ -412,16 +431,32 @@ case "$subcommand" in
     version)
         printinfo
         ;;
+    auto-update)
+        if [ "$asAutoCheckUpdate" = "true" ]; then
+            sed -i 's/^asAutoCheckUpdate="true"$/asAutoCheckUpdate="false"/' "$(which flattool)"
+            echo "flattool will not check for updates on each run. To manually check, run 'flattool update-check'"
+        else
+            sed -i 's/^asAutoCheckUpdate="false"$/asAutoCheckUpdate="true"/' "$(which flattool)"
+            echo "flattool will check for updates on each run."
+        fi
+        ;;
     update-check)
         checkForNewVersion
         case $? in
             0)
                 echo "flattool is up to date"
                 ;;
+            1)
+                echo "New version of flattool is available: ${latestTag}"
+                userConsent "Do you want to install this new update?"
+                echo "Installing new version..."
+                wget -N -P $(dirname $(which flattool)) "https://raw.githubusercontent.com/${owner}/${repo}/main/flattool"
+                ;;
             2)
                 echo "Due to GitHub API restrictions, can only check for updates once an hour"
                 ;;
-            esac
+        esac
+        exit 0
         ;;
     *)
         printerr "'${subcommand}' is not a flattool command" "See 'flattool --help'"
