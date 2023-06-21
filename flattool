@@ -314,7 +314,8 @@ if [ "$asFirstRun" == "true" ]; then
     sed -i 's/^asFirstRun="true"$/asFirstRun="false"/' "$(which flattool)"
     echo -e "Thank you for using flattool! This is the first time its being ran. Make sure to run 'flattool --help' if you are unsure of how to use this.\n"
     echo -e "flattool can check for updates, these checks will occur on every run, so long as it has been an hour since the last check."
-    echo -n "Do you want to enable auto update checks? (You can change your mind later with 'flattool auto-update') [Y|n]: "
+    echo -e "To install an update, run 'flattool update-check'."
+    echo -n "Do you want to enable auto update checking? (You can change your mind later with 'flattool auto-update') [Y|n]: "
     read -r answer
     case $answer in
         [Nn])
