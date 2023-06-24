@@ -1,26 +1,25 @@
-# flattool
-![Flattool Logo, a simple icon of a tower crane holding a dangling letter F in front of "lattool"](flattool_logo-name.png)
-Flattool is a command line script that should make dealing with flatpaks through the command line better.
+![Flattool Logo](flattool_logo-name.png)
 
-## Flattool has 3 main uses:
-1. Flattool can handle multiple installs in a loop instead of all at once, meaning that if a match is not found, your entire queue is not lost.
-2. Flattool makes running apps from the command line easier. Instead of needing to use the app's full Application ID, you need only to type in a query for flattool to match.
-3. Flattool can help clean up orphaned user files. Flattool will find any user data files that do not have an associated flatpak installed, and either trash the folder or attempt to install the flatpak, based on your choice.
+Flattool is a command line script designed to improve the experience of working with flatpaks through the command line.
 
-## Important things to note:
-- This is my first big project. It's at a 1.0 release, but I am still a new developer, so please don't be too rough if there are bugs
-- Flattool assumes that flatpak user data is stored within ~/.var/app (the default location for these folders).
-- Flattool is not a replacement for flatpak, it merely sends the appropriate flatpak commands for the desired action.
-- Flattool uses `gio trash` to delete folders, not `rm`, so if you want to clear your diskspace you'll still need to empty your trash. This is to avoid any perminant deletion of files.
+## Main Features:
+1. **Handling Multiple Installs**: Flattool allows you to handle multiple flatpak installs in a loop, ensuring that if a match is not found, your entire queue is not lost.
+2. **Simplified App Execution**: Running apps from the command line becomes easier with Flattool. Instead of using the app's full Application ID, you can simply enter a query for Flattool to match.
+3. **Cleanup of Orphaned User Files**: Flattool helps you clean up orphaned user data files. It identifies user data files that are not associated with any installed flatpak and offers options to either trash the folder or attempt to install the associated flatpak.
 
-## Dependancies
-- gio. As said before, this script uses `gio trash`, so gio must be installed. gio is part of glib2, so make sure glib2 is on your system.
-- flatpak. Of course, this script's entire purpose is for managing flatpak applications, as such, flatpak itself must be installed.
+## Important Notes:
+- This is my first major project, currently at version 1.0. As a new developer, I appreciate your understanding if there are any bugs.
+- Flattool assumes that flatpak user data is stored within the default location: `~/.var/app`.
+- Flattool is not meant to replace flatpak; it simply sends appropriate flatpak commands for the desired actions.
+- To delete folders, Flattool uses `gio trash` instead of `rm`, so remember to empty your trash to reclaim disk space. This prevents accidental permanent deletion of files.
 
-## How to install:
-1. Run `printf $PATH` in your terminal.  
-2. Download flattool file inside a directory mentioned in "printf $PATH" command with: `wget -P /path/to/bin/directory https://raw.githubusercontent.com/heliguy4599/flattool/main/flattool`
-3. Navigate to where you have downloaded the flattool file and run `chmod +x flattool`. This will allow flattool to be executed.
+## Dependencies:
+- gio: Flattool uses `gio trash` for deleting folders, so make sure gio is installed. gio is part of glib2.
+- flatpak: Since this script is for managing flatpak applications, flatpak itself must be installed.
 
+## Installation Steps:
+1. Run the command `printf $PATH` in your terminal to view the directories in your PATH.
+2. Download the flattool script to one of the directories shown in the previous step. You can use the following command: `wget -P /path/to/bin/directory https://raw.githubusercontent.com/heliguy4599/flattool/main/flattool`
+3. Navigate to the directory where you downloaded the flattool file and run `chmod +x flattool` to make it executable.
 
-All set! Now all you need to do is run flattool with `flattool --help`.
+You're all set! Now you can run flattool using the command `flattool --help`.
