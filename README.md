@@ -17,10 +17,10 @@ To use Flattool effectively, you need to ensure the following dependencies are i
 
 - **flatpak:** Since Flattool is specifically designed for managing flatpak applications, you must have `flatpak` installed on your system.
 
-## Optional dependancies
-- There is no universal way to move a file to your user's trash, to somewhat fix this, ![trash-cli](https://github.com/andreafrancia/trash-cli) is a nice project that exists and flattool can use it, but only if trash-cli is installed on your system.
-- As a fallback, flattool will then try to use `gio trash` if trash-cli is not installed.
-- Unfortunately, `gio trash` is usually only preinstalled with gnome, so if that is not present, then flattool wil default to `rm -rf`, which will perminantly delete specified files.
+## Optional dependancies:
+- ![trash-cli](https://github.com/andreafrancia/trash-cli) - Utilized to move files to your user's trash instead of perminantly deleting them.
+- `gio` - `gio trash` is utilized to move files to your user's trash if `trash-cli` is not installed.
+- Unfortunately, `gio trash` is usually only preinstalled with gnome, so if that is not present, then flattool wil default to `rm -rf`, which will **perminantly delete** specified files.
 
 ## Installation Steps:
 1. Run the command `printf $PATH` in your terminal to view the directories in your PATH.
