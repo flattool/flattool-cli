@@ -347,7 +347,7 @@ if [ "$asFirstRun" == "true" ]; then
             echo "flattool found gio on your system, nice! Any deleted data will be moved to your trash."
             echo "flattool also works with trash-cli, by the way."
         else
-            echo "Sadly flattool found no supported method for trashing your files. And deleted data will be ${bold}perminantly deleted${normal}."
+            echo "Sadly flattool found no supported method for trashing your files. And deleted data will be ${boldTxt}perminantly deleted${normalTxt}."
         fi
     fi
 fi
