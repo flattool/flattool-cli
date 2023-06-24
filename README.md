@@ -1,4 +1,4 @@
-![Flattool Logo](flattool_logo-name.png)
+![Flattool Logo a simple icon of a tower crane holding a dangling letter F in front of "lattool"](flattool_logo-name.png)
 
 Flattool is a command line script designed to improve the experience of working with flatpaks through the command line.
 
