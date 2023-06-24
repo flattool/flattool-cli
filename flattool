@@ -7,7 +7,7 @@ asLastUpdateCheck="0000000000"
 asAutoCheckUpdate="false"
 
 # Global variables
-versionNumber="1.1.0"
+versionNumber="1.1.1"
 owner="heliguy4599"
 repo="flattool"
 appID=''
@@ -94,6 +94,19 @@ checkArgLength() {
         exit 1
     fi
 }
+
+trashFile() {
+    if command -v trash-put >/dev/null 2>&1; then
+        trash-put "$1"
+        return
+    fi
+    if command -v gio >/dev/null 2>&1; then
+        gio trash "$1"
+        return
+    fi
+    rm -rf "$1"
+    return
+}
 # ====================================================================================
 
 printMasterHelp() {
@@ -129,7 +142,7 @@ printSubcommandHelp() {
         purge)
             echo -e "  purge - usage: flattool purge <app-query>"
             echo -e "    can also be ran with '-p'"
-            echo -e "    about: Uninstalls a flatpak app and trashes its user data folder\n"
+            echo -e "    about: Uninstalls a flatpak app and deletes its user data folder\n"
             ;;
         search)
             echo -e "  search - usage: flattool search <app-query>"
@@ -211,9 +224,9 @@ removeApp() {
 
 purgeApp() {
     identifyByQuery "$1"
-    userConsent "Are you sure you want to uninstall ${boldTxt}${appID}${normalTxt} and move its user data to the trash?"
+    userConsent "Are you sure you want to uninstall ${boldTxt}${appID}${normalTxt} and delete its user data?"
     flatpak uninstall "$appID"
-    gio trash "${HOME}/.var/app/${appID}"
+    trashFile "${HOME}/.var/app/${appID}"
 }
 
 fixOrphans() {
@@ -236,7 +249,7 @@ fixOrphans() {
 
         echo "What would you like to do with these folders?"
         echo "  1) Attempt to install matching flatpaks"
-        echo "  2) Move these folders to the trash"
+        echo "  2) Delete these folders"
 
         totalOfOrphans=${#orphanedAppsList[@]}
         maxChoices=2
@@ -261,9 +274,9 @@ fixOrphans() {
                 installApp "${orphanedAppsList[@]}"
                 ;;
             2)
-                echo "Trashing..."
+                echo "Deleting..."
                 for element in "${orphanedAppsList[@]}"; do
-                    gio trash "${HOME}/.var/app/${element}"
+                    trashFile "${HOME}/.var/app/${element}"
                 done
                 ;;
             3)
@@ -274,8 +287,8 @@ fixOrphans() {
                         read -r answer
                         case "$answer" in
                             [Tt])
-                                echo "Trashing..."
-                                gio trash "${HOME}/.var/app/${element}"
+                                echo "Deleting..."
+                                trashFile "${HOME}/.var/app/${element}"
                                 break
                                 ;;
                             [Ii])
@@ -324,7 +337,19 @@ if [ "$asFirstRun" == "true" ]; then
         *)
             sed -i 's/^asAutoCheckUpdate="false"$/asAutoCheckUpdate="true"/' "$(which flattool)"
             ;;
-    esac        
+    esac
+    
+    # Check which trashing methods, if any, are avaialable
+    if command -v trash-put >/dev/null 2>&1; then
+        echo "flattool found trash-cli on your system, nice! Any deleted data will be moved to your trash."
+    else 
+        if command -v gio >/dev/null 2>&1; then
+            echo "flattool found gio on your system, nice! Any deleted data will be moved to your trash."
+            echo "flattool also works with trash-cli, by the way."
+        else
+            echo "Sadly flattool found no supported method for trashing your files. And deleted data will be ${bold}perminantly deleted${normal}."
+        fi
+    fi
 fi
 
 # Setting the subcommand
@@ -442,6 +467,7 @@ case "$subcommand" in
         fi
         ;;
     update-check)
+        asLastUpdateCheck="0000000000"
         checkForNewVersion
         case $? in
             0)
@@ -452,9 +478,6 @@ case "$subcommand" in
                 userConsent "Do you want to install this new update?"
                 echo "Installing new version..."
                 wget -N -P "$(dirname "$(which flattool)")" "https://raw.githubusercontent.com/${owner}/${repo}/main/flattool"
-                ;;
-            2)
-                echo "Due to GitHub API restrictions, can only check for updates once an hour"
                 ;;
         esac
         exit 0
