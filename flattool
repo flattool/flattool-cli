@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 # Settings and stuff, 'as' stands for App Setting. LastUpdateCheck must be 10 digits
-asFirstRun="true"
+asFirstRun="false"
 asLastUpdateCheck="0000000000"
 asAutoCheckUpdate="false"
 
@@ -461,7 +461,7 @@ case "$subcommand" in
         ;;
     export)
         checkArgLength 0 0 "$@"
-        echo flatpak install $(flatpak list --columns=application)
+        echo flatpak install "$(flatpak list --columns=application | tr '\n' ' ')"
         ;;
     help)
         printMasterHelp
