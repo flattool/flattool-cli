@@ -7,7 +7,7 @@ asLastUpdateCheck="0000000000"
 asAutoCheckUpdate="false"
 
 # Global variables
-versionNumber="1.1.1"
+versionNumber="1.2.0"
 owner="heliguy4599"
 repo="flattool"
 appID=''
@@ -150,7 +150,7 @@ printSubcommandHelp() {
             echo -e "    about: Searches installed flatpaks and returns lines from 'flatpak list' that match the query\n"
             ;;
         id)
-            echo -e "  id - usage: flattool id <app-query>"
+            echo -e "  id - usage: flattool id <app-query> <app-query> <app-query> ..."
             echo -e "    about: Returns the first matching Application ID for the query\n"
             ;;
         run)
@@ -162,6 +162,11 @@ printSubcommandHelp() {
             echo -e "  orphans - usage: flattool orphans"
             echo -e "    can also be ran with '-o'"
             echo -e "    about: Looks through ~/.var/app (the user data folder) and finds all folders that do not have corrosponding installed flatpaks, then prompts asks user what to do with them\n"
+            ;;
+        export)
+            echo -e "  export - usage: flattool export"
+            echo -e "    can also be ran with '-e'"
+            echo -e "    about: Returns 'flatpak install <all installed flatpak application IDs>' so that you can copy and paste this to a new machine to install all your flatpaks"
             ;;
         version)
             echo -e "  version - usage: flattool version"
@@ -388,6 +393,9 @@ case $subcommand in
     -o)
         subcommand="orphans"
         ;;
+    -e)
+        subcommand="export"
+        ;;
     -s)
         subcommand="search"
         ;;
@@ -450,6 +458,10 @@ case "$subcommand" in
         ;;
     orphans)
         fixOrphans
+        ;;
+    export)
+        checkArgLength 0 0 "$@"
+        echo flatpak install $(flatpak list --columns=application)
         ;;
     help)
         printMasterHelp
