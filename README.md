@@ -24,7 +24,7 @@ To use Flattool effectively, you need to ensure the following dependencies are i
 
 ## Installation Steps:
 1. Run the command `printf $PATH` in your terminal to view the directories in your PATH.
-2. Download the flattool script to one of the directories shown in the previous step. You can use the following command: `wget -P /path/to/bin/directory https://eryn.cloud/flattool/flattool`
+2. Download the flattool script to one of the directories shown in the previous step. You can use the following command: `wget -P /path/to/bin/directory https://raw.githubusercontent.com/heliguy4599/flattool/main/flattool`
 3. Navigate to the directory where you downloaded the flattool file and run `chmod +x flattool` to make it executable.
 
 You're all set! Now you can run flattool using the command `flattool --help`.
