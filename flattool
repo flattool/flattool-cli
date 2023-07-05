@@ -293,7 +293,7 @@ fixOrphans() {
             3)
             	numberOfRound=$totalOfOrphans
                 for element in "${orphanedAppsList[@]}"; do
-                    numberOfRound=$(($numberOfRound - 1))
+                    numberOfRound=$((numberOfRound - 1))
         	    echo -e "${boldTxt}${numberOfRound} Flatpaks to go${normalTxt}\n"
                     echo "For folder '${element}', choose an option"
                     echo -n "[T]rash, [I]install, or [S]kip: "
