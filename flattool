@@ -2,12 +2,12 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 # Settings and stuff, 'as' stands for App Setting. LastUpdateCheck must be 10 digits
-asFirstRun="false"
+asFirstRun="true"
 asLastUpdateCheck="0000000000"
 asAutoCheckUpdate="false"
 
 # Global variables
-versionNumber="1.2.0"
+versionNumber="1.3.0"
 owner="heliguy4599"
 repo="flattool"
 appID=''
@@ -214,6 +214,9 @@ installApp() {
     while [ $# -gt 0 ]; do
         flatpak install "$1"
         echo
+        if [ $# -gt 0 ]; then
+		echo "${boldTxt}$(($# - 1)) Flatpaks to go${normalTxt}"
+        fi
         shift
     done
 }
@@ -223,6 +226,9 @@ removeApp() {
     while [ $# -gt 0 ]; do
         flatpak remove "$1"
         echo
+        if [ $# -gt 0 ]; then
+		echo "${boldTxt}$(($# - 1)) Flatpaks to go${normalTxt}"
+        fi
         shift
     done
 }
@@ -285,7 +291,10 @@ fixOrphans() {
                 done
                 ;;
             3)
+            	numberOfRound=$totalOfOrphans
                 for element in "${orphanedAppsList[@]}"; do
+                    numberOfRound=$(($numberOfRound - 1))
+        	    echo -e "${boldTxt}${numberOfRound} Flatpaks to go${normalTxt}\n"
                     echo "For folder '${element}', choose an option"
                     echo -n "[T]rash, [I]install, or [S]kip: "
                     while true; do
