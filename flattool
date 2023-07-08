@@ -7,7 +7,7 @@ asLastUpdateCheck="0000000000"
 asAutoCheckUpdate="false"
 
 # Global variables
-versionNumber="1.3.0"
+versionNumber="1.3.1"
 owner="heliguy4599"
 repo="flattool"
 appID=''
@@ -121,6 +121,7 @@ printMasterHelp() {
     printSubcommandHelp "id"
     printSubcommandHelp "run"
     printSubcommandHelp "orphans"
+    printSubcommandHelp "export"
     printSubcommandHelp "version"
     printSubcommandHelp "auto-update"
     printSubcommandHelp "update-check"
