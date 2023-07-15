@@ -20,7 +20,7 @@ To use Flattool effectively, you need to ensure the following dependencies are i
 ## Optional dependancies:
 - ![trash-cli](https://github.com/andreafrancia/trash-cli) - Utilized to move files to your user's trash instead of perminantly deleting them.
 - `gio` - `gio trash` is utilized to move files to your user's trash if `trash-cli` is not installed.
-- Unfortunately, `gio trash` is usually only preinstalled with gnome, so if that is not present, then flattool wil default to `rm -rf`, which will **perminantly delete** specified files.
+- Unfortunately, `gio trash` is usually only preinstalled with gnome, so if that is not present, then flattool wil default to `rm -rf`, which will **permanently delete** specified files.
 
 ## Installation Steps:
 1. Run the command `printf $PATH` in your terminal to view the directories in your PATH.
