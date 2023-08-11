@@ -7,7 +7,7 @@ asLastUpdateCheck="0000000000"
 asAutoCheckUpdate="false"
 
 # Global variables
-versionNumber="1.3.1"
+versionNumber="1.4.0"
 owner="heliguy4599"
 repo="flattool"
 appID=''
@@ -122,6 +122,7 @@ printMasterHelp() {
     printSubcommandHelp "run"
     printSubcommandHelp "orphans"
     printSubcommandHelp "export"
+    printSubcommandHelp "add-flathub"
     printSubcommandHelp "version"
     printSubcommandHelp "auto-update"
     printSubcommandHelp "update-check"
@@ -168,6 +169,15 @@ printSubcommandHelp() {
             echo -e "  export - usage: flattool export"
             echo -e "    can also be ran with '-e'"
             echo -e "    about: Returns 'flatpak install <all installed flatpak application IDs>' so that you can copy and paste this to a new machine to install all your flatpaks"
+            ;;
+        data-dir)
+            echo -e "  data-dir - usage: flattool data-dir <app query>"
+            echo -e "    can also be ran with '-d'"
+            echo -e "    about: Displays the path to the user data directory of the first matching flatpak, adding '--open' or '-o' at the end will open the path"
+            ;;
+        add-flathub)
+            echo -e "  add-flathub - usage: flattool add-flathub <user,system>"
+            echo -e "    about: Adds the flathub remoted repository flathub to either the system install or user install depending on the option chosen"
             ;;
         version)
             echo -e "  version - usage: flattool version"
@@ -295,7 +305,7 @@ fixOrphans() {
             	numberOfRound=$totalOfOrphans
                 for element in "${orphanedAppsList[@]}"; do
                     numberOfRound=$((numberOfRound - 1))
-        	    echo -e "${boldTxt}${numberOfRound} Flatpaks to go${normalTxt}\n"
+        	        echo -e "${boldTxt}${numberOfRound} Flatpaks to go${normalTxt}\n"
                     echo "For folder '${element}', choose an option"
                     echo -n "[T]rash, [I]install, or [S]kip: "
                     while true; do
@@ -329,6 +339,21 @@ fixOrphans() {
     else
         echo "There are no orphaned user data folders"
     fi
+
+}
+
+flathub-add() {
+    case "$1" in
+        user | -u | --user)
+            flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo --user
+            ;;
+        system | -s | --system)
+            flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+            ;;
+        *)
+            printerr "'${1}' is not an option" "Please specify either 'user' or 'system'"
+            ;;
+    esac
 }
 # ====================================================================================
 
@@ -341,8 +366,24 @@ fixOrphans() {
 if [ "$asFirstRun" == "true" ]; then
     sed -i 's/^asFirstRun="true"$/asFirstRun="false"/' "$0"
     echo -e "Thank you for using flattool! This is the first time its being ran. Make sure to run 'flattool --help' if you are unsure of how to use this.\n"
-    echo -e "flattool can check for updates, these checks will occur on every run, so long as it has been an hour since the last check."
-    echo -e "To install an update, run 'flattool update-check'."
+    
+    # Check which trashing methods, if any, are avaialable
+    if command -v trash-put >/dev/null 2>&1; then
+        echo -e "Trashing Method: trash-cli"
+        echo -e "  All deleted files will be sent to your trash"
+    else 
+        if command -v gio >/dev/null 2>&1; then
+            echo -e "Trashing Method: gio"
+            echo -e "  All deleted files will be sent to your trash"
+        else
+            echo -e "Trashing Method: Sadly flattool found no supported method for trashing your files. And deleted data will be ${boldTxt}perminantly deleted${normalTxt}."
+            echo -e "  To allow flattool to send items to your trash instead, please install trash-cli or gio."
+        fi
+    fi
+    echo # For a nice newline
+
+    echo -e "Flattool can check for updates, these checks will occur on every run, so long as it has been an hour since the last check."
+    echo -e "  To install an update, run 'flattool update-check'.\n"
     echo -n "Do you want to enable auto update checking? (You can change your mind later with 'flattool auto-update') [Y|n]: "
     read -r answer
     case $answer in
@@ -353,17 +394,31 @@ if [ "$asFirstRun" == "true" ]; then
             sed -i 's/^asAutoCheckUpdate="false"$/asAutoCheckUpdate="true"/' "$0"
             ;;
     esac
+    echo # For a nice newline
     
-    # Check which trashing methods, if any, are avaialable
-    if command -v trash-put >/dev/null 2>&1; then
-        echo "flattool found trash-cli on your system, nice! Any deleted data will be moved to your trash."
-    else 
-        if command -v gio >/dev/null 2>&1; then
-            echo "flattool found gio on your system, nice! Any deleted data will be moved to your trash."
-            echo "flattool also works with trash-cli, by the way."
-        else
-            echo "Sadly flattool found no supported method for trashing your files. And deleted data will be ${boldTxt}perminantly deleted${normalTxt}."
-        fi
+    # Adding flathub if its not found
+    hasFlathub=$(flatpak remotes | grep flathdub)
+    if [ -z "$hasFlathub" ]; then
+        answer=""
+        while [ -z "$answer" ]; do
+            echo -n "The flathub remote has not been found, would you like to add it as a [U]ser remote, [S]ystem remote, or [I]gnore: "
+            read -r answer
+            case $answer in
+                [Uu])
+                    flathub-add user
+                    ;;
+                [Ss])
+                    flathub-add system
+                    ;;
+                [Ii])
+                    echo -e "You can add flathub any time later with 'flattool add-flathub'"
+                    ;;
+                *)
+                    answer="" # Clear the answer variable so the loop runs again
+                    ;;
+            esac
+        done
+        echo # For a nice newline
     fi
 fi
 
@@ -408,6 +463,9 @@ case $subcommand in
         ;;
     -s)
         subcommand="search"
+        ;;
+    -d)
+        subcommand="data-dir"
         ;;
     -v | --version)
         subcommand="version"
@@ -472,6 +530,19 @@ case "$subcommand" in
     export)
         checkArgLength 0 0 "$@"
         echo flatpak install "$(flatpak list --columns=application | tr '\n' ' ')"
+        ;;
+    data-dir)
+        checkArgLength 1 2 "$@"
+        identifyByQuery "$2"
+        echo "${HOME}/.var/app/${appID}"
+        if [ "$3" == "-o" ] || [ "$3" == "--open" ]; then
+            xdg-open "${HOME}/.var/app/${appID}"
+        fi
+        ;;
+    add-flathub)
+        checkArgLength 1 1 "$@"
+        shift
+        flathub-add "$@"
         ;;
     help)
         printMasterHelp
