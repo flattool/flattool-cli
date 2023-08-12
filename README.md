@@ -8,7 +8,7 @@ Flattool is a command line script designed to improve the experience of working 
 3. **Cleanup of Orphaned User Files**: Flattool helps you clean up orphaned user data files. It identifies user data files that are not associated with any installed flatpak and offers options to either trash the folder or attempt to install the associated flatpak.
 
 ## Important Notes:
-- This is my first major project, currently at version 1.0. As a new developer, I appreciate your understanding if there are any bugs.
+- This is my first major project. As a new developer, I appreciate your understanding if there are any bugs.
 - Flattool assumes that flatpak user data is stored within the default location: `~/.var/app`.
 - Flattool is not meant to replace flatpak; it simply sends appropriate flatpak commands for the desired actions.
 
