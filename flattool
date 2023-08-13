@@ -397,7 +397,7 @@ if [ "$asFirstRun" == "true" ]; then
     echo # For a nice newline
     
     # Adding flathub if its not found
-    hasFlathub=$(flatpak remotes | grep flathdub)
+    hasFlathub=$(flatpak remotes | grep flathub)
     if [ -z "$hasFlathub" ]; then
         answer=""
         while [ -z "$answer" ]; do
