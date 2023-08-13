@@ -2,9 +2,9 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 # Settings and stuff, 'as' stands for App Setting. LastUpdateCheck must be 10 digits
-asFirstRun="true"
-asLastUpdateCheck="0000000000"
-asAutoCheckUpdate="false"
+asFirstRun="false"
+asLastUpdateCheck="1691886636"
+asAutoCheckUpdate="true"
 
 # Global variables
 versionNumber="1.4.0"
@@ -122,6 +122,7 @@ printMasterHelp() {
     printSubcommandHelp "run"
     printSubcommandHelp "orphans"
     printSubcommandHelp "export"
+    printSubcommandHelp "data-dir"
     printSubcommandHelp "add-flathub"
     printSubcommandHelp "version"
     printSubcommandHelp "auto-update"
@@ -168,16 +169,16 @@ printSubcommandHelp() {
         export)
             echo -e "  export - usage: flattool export"
             echo -e "    can also be ran with '-e'"
-            echo -e "    about: Returns 'flatpak install <all installed flatpak application IDs>' so that you can copy and paste this to a new machine to install all your flatpaks"
+            echo -e "    about: Returns 'flatpak install <all installed flatpak application IDs>' so that you can copy and paste this to a new machine to install all your flatpaks\n"
             ;;
         data-dir)
             echo -e "  data-dir - usage: flattool data-dir <app query>"
             echo -e "    can also be ran with '-d'"
-            echo -e "    about: Displays the path to the user data directory of the first matching flatpak, adding '--open' or '-o' at the end will open the path"
+            echo -e "    about: Displays the path to the user data directory of the first matching flatpak, adding '--open' or '-o' at the end will open the path\n"
             ;;
         add-flathub)
             echo -e "  add-flathub - usage: flattool add-flathub <user,system>"
-            echo -e "    about: Adds the flathub remoted repository flathub to either the system install or user install depending on the option chosen"
+            echo -e "    about: Adds the flathub remoted repository flathub to either the system install or user install depending on the option chosen\n"
             ;;
         version)
             echo -e "  version - usage: flattool version"
