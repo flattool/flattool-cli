@@ -2,12 +2,12 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 # Settings and stuff, 'as' stands for App Setting. LastUpdateCheck must be 10 digits
-asFirstRun="false"
-asLastUpdateCheck="1691886636"
-asAutoCheckUpdate="true"
+asFirstRun="true"
+asLastUpdateCheck="0000000000"
+asAutoCheckUpdate="false"
 
 # Global variables
-versionNumber="1.4.0"
+versionNumber="1.4.1"
 owner="heliguy4599"
 repo="flattool"
 appID=''
