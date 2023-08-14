@@ -7,7 +7,7 @@ asLastUpdateCheck="0000000000"
 asAutoCheckUpdate="false"
 
 # Global variables
-versionNumber="1.4.1"
+versionNumber="1.4.2"
 owner="heliguy4599"
 repo="flattool"
 appID=''
