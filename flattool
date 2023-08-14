@@ -254,10 +254,11 @@ purgeApp() {
 
 fixOrphans() {
     echo "Checking '~/.var/app' for orphaned folders..."
+    appsList="$(flatpak list)"
     orphanedAppsList=()
     for element in "$HOME/.var/app/"*; do
         element=$(basename "$element")
-        foundApp=$(flatpak list | grep -i "$element")
+        foundApp=$(grep -i "$element" <<< "$appsList")
         if [ -z "$foundApp" ]; then
             orphanedAppsList+=( "$element" )
         fi
