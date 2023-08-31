@@ -8,8 +8,8 @@ asAutoCheckUpdate="false"
 
 # Global variables
 versionNumber="1.4.2"
-owner="heliguy4599"
-repo="flattool"
+owner="flattool"
+repo="flattool-cli"
 appID=''
 boldTxt=$(tput bold)
 normalTxt=$(tput sgr0)
@@ -572,7 +572,7 @@ case "$subcommand" in
                 echo "New version of flattool is available: ${latestTag}"
                 userConsent "Do you want to install this new update?"
                 echo "Installing new version..."
-                wget -N -P "$(dirname "$0")" "https://raw.githubusercontent.com/${owner}/${repo}/main/flattool"
+                wget -N -P "$(dirname "$0")" "https://raw.githubusercontent.com/${owner}/${repo}/main/flattool-cli"
                 ;;
         esac
         exit 0
