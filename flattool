@@ -7,7 +7,7 @@ asLastUpdateCheck="0000000000"
 asAutoCheckUpdate="false"
 
 # Global variables
-versionNumber="1.4.2"
+versionNumber="1.4.3"
 owner="flattool"
 repo="flattool-cli"
 appID=''
@@ -576,6 +576,19 @@ case "$subcommand" in
                 ;;
         esac
         exit 0
+        ;;
+    moo)
+        echo "I don't moo, I bleat! I'm a deer, silly."
+        ;;
+    bleat)
+        echo -e "Credit: https://www.asciiart.eu/animals/deer\n"
+        echo -e "      (             )"
+        echo -e "       '--(_   _)--'"
+        echo -e "            Y-Y"
+        echo -e "*Bleat*    /.. \ "
+        echo -e "       \  /     \ "
+        echo -e "          \--/.  \             ,"
+        echo -e "              |   '.__________/)\n"
         ;;
     *)
         printerr "'${subcommand}' is not a flattool command" "See 'flattool --help'"
