@@ -572,7 +572,7 @@ case "$subcommand" in
                 echo "New version of flattool is available: ${latestTag}"
                 userConsent "Do you want to install this new update?"
                 echo "Installing new version..."
-                wget -N -P "$(dirname "$0")" "https://raw.githubusercontent.com/${owner}/${repo}/main/flattool-cli"
+                wget -N -P "$(dirname "$0")" "https://raw.githubusercontent.com/${owner}/${repo}/main/flattool"
                 ;;
         esac
         exit 0
