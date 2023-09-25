@@ -27,7 +27,7 @@ To use Flattool effectively, you need to ensure the following dependencies are i
 2. Download the flattool script to one of the directories shown in the previous step. You can use the following command: `wget -P /path/to/bin/directory https://raw.githubusercontent.com/heliguy4599/flattool/main/flattool`
 3. Navigate to the directory where you downloaded the flattool file and run `chmod +x flattool` to make it executable.
 
-You're all set! Now you can run flattool using the command `flattool --help
+You're all set! Now you can run flattool using the command `flattool --help`.
 
 ## Graphical User interface:
 [Warehouse](https://github.com/flattool/warehouse) is a graphical user interface for flattool, which uses libadwaita and provides the same features (and some others) of flattool-cli.
