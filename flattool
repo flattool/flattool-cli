@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 # Settings and stuff, 'as' stands for App Setting. LastUpdateCheck must be 10 digits
-asFirstRun="true"
-asLastUpdateCheck="0000000000"
+asFirstRun="false"
+asLastUpdateCheck="1698536434"
 asAutoCheckUpdate="false"
 
 # Global variables
@@ -135,12 +135,14 @@ printSubcommandHelp() {
         install)
             echo "  install - usage: flattool install <app-query> <app-query> <app-query> ..."
             echo -e "    can also be ran with '-i'"
-            echo -e "    about: Installs one or more flatpak apps with separate processes to avoid cancelling the queue if a name cannot be matched\n"
+            echo -e "    about: Installs one or more flatpak apps with separate processes
+           to avoid cancelling the queue if a name cannot be matched\n"
             ;;
         uninstall)
             echo -e "  uninstall - usage: flattool uninstall <app-query> <app-query> <app-query> ..."
             echo -e "    can also be ran with '-u', 'remove', 'rm'"
-            echo -e "    about: Uninstalls one or more flatpak apps with separate processes to avoid cancelling the queue if a name cannot be matched\n"
+            echo -e "    about: Uninstalls one or more flatpak apps with separate processes
+           to avoid cancelling the queue if a name cannot be matched\n"
             ;;
         purge)
             echo -e "  purge - usage: flattool purge <app-query>"
@@ -150,7 +152,8 @@ printSubcommandHelp() {
         search)
             echo -e "  search - usage: flattool search <app-query>"
             echo -e "    can also be ran with '-s'"
-            echo -e "    about: Searches installed flatpaks and returns lines from 'flatpak list' that match the query\n"
+            echo -e "    about: Searches installed flatpaks and returns lines from
+           'flatpak list' that match the query\n"
             ;;
         id)
             echo -e "  id - usage: flattool id <app-query> <app-query> <app-query> ..."
@@ -159,31 +162,38 @@ printSubcommandHelp() {
         run)
             echo -e "  run - usage: flattool run <app-query>"
             echo -e "    can also be ran with '-r'"
-            echo -e "    about: Runs the first matching application for the query, not requiring the full Application ID. Passes any extra arguments to the app to run except '--help' and '-h'\n"
+            echo -e "    about: Runs the first matching application for the query, not requiring
+           the full Application ID. Passes any extra arguments to the app to run except '--help' and '-h'\n"
             ;;
         orphans)
             echo -e "  orphans - usage: flattool orphans"
             echo -e "    can also be ran with '-o'"
-            echo -e "    about: Looks through ~/.var/app (the user data folder) and finds all folders that do not have corrosponding installed flatpaks, then prompts asks user what to do with them\n"
+            echo -e "    about: Looks through ~/.var/app (the user data folder) and 
+           finds all folders that do not have corrosponding installed flatpaks, then prompts
+           asks user what to do with them\n"
             ;;
         export)
             echo -e "  export - usage: flattool export"
             echo -e "    can also be ran with '-e'"
-            echo -e "    about: Returns 'flatpak install <all installed flatpak application IDs>' so that you can copy and paste this to a new machine to install all your flatpaks\n"
+            echo -e "    about: Returns 'flatpak install <all installed flatpak application IDs>'
+           so that you can copy and paste this to a new machine to install all your flatpaks\n"
             ;;
         data-dir)
             echo -e "  data-dir - usage: flattool data-dir <app query>"
             echo -e "    can also be ran with '-d'"
-            echo -e "    about: Displays the path to the user data directory of the first matching flatpak, adding '--open' or '-o' at the end will open the path\n"
+            echo -e "    about: Displays the path to the user data directory of the first matching
+           flatpak, adding '--open' or '-o' at the end will open the path\n"
             ;;
         add-flathub)
             echo -e "  add-flathub - usage: flattool add-flathub <user,system>"
-            echo -e "    about: Adds the flathub remoted repository flathub to either the system install or user install depending on the option chosen\n"
+            echo -e "    about: Adds the flathub remoted repository flathub to either the
+           system install or user install depending on the option chosen\n"
             ;;
         version)
             echo -e "  version - usage: flattool version"
             echo -e "    can also be ran with '-v', '--version'"
-            echo -e "    about: Prints the currently running version of flattool and where flattool is running from\n"
+            echo -e "    about: Prints the currently running version of flattool and
+           where flattool is running from\n"
             ;;
         auto-update)
             echo -e "  auto-update - usage: flattool auto-update"
@@ -191,7 +201,8 @@ printSubcommandHelp() {
             ;;
         update-check)
             echo -e "  update-check: flattool update-check"
-            echo -e "    about: Checks github to see if there is a new release and if there is, prompts to install it. Can only check once an hour.\n"
+            echo -e "    about: Checks github to see if there is a new release and if
+           there is, prompts to install it. Can only check once an hour.\n"
             ;;
         help)
             echo -e "  help - usage: flattool help"
