@@ -7,7 +7,7 @@ asLastUpdateCheck="0000000000"
 asAutoCheckUpdate="false"
 
 # Global variables
-versionNumber="1.4.3"
+versionNumber="1.4.4"
 owner="flattool"
 repo="flattool-cli"
 appID=''
@@ -17,8 +17,8 @@ errTxt=$(tput setaf 1 && tput bold)
 
 # Haha, April Fools nerd
 if [ "$(date +%m%d)" -eq 0401 ]; then
-    echo "Haha, April 1st, get ejected"
-    eject
+    echo "Haha, April 1st"
+    flattool bleat
 fi
 
 # Functions to save time programming this
